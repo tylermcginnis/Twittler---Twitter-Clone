@@ -5,15 +5,18 @@
     <script src="data_generator.js"></script>
   </head>
   <body>
-    <h2 id="show_tweets"> Display Tweets (X); </h2>
+    <div id="show_tweets">
+      <h2 id="tweet_number"></h2>
+    </div>
     <script>
       var total_tweets = 0; 
+      var counter = 0; //Number of tweets in que
+      var display = 0; //Difference between displayed tweets and total tweets in the array
       $(document).ready(function(){
         //var $body = $('body');
         //$body.html('');
-        var counter =0; //Number of tweets in que
-        var display =0; //Difference between displayed tweets and total tweets in the array
-        var total_tweets = 0; //Totals tweets displaying
+        $('#show_tweets').click(showTweets);
+        
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
@@ -25,13 +28,39 @@
         }
 
         function watchArray(){
-          counter = streams.home.length;
+          counter = streams.home.length-1;
           display = counter - total_tweets; 
           console.log(display);
           setTimeout(watchArray, 3000);
         }
-        watchArray(); //Checks the tweets in the que. 
+        watchArray(); //Checks the tweets in the array.
+
+         
+
+        function changeNumber(){
+          if(display < 0){
+            $('#tweet_number').text("New Tweets: " + 0);
+          }
+          else{
+            $('#tweet_number').text("New Tweets: " + display);
+          }
+          setTimeout(changeNumber, 10);
+        }
+        changeNumber(); 
+                  
+
       }); // End Document Ready
+
+        function showTweets(){
+          while(display >= 1){
+            var tweet = streams.home[display]; 
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.appendTo($('body'));
+            total_tweets++; 
+            display -= 1;
+          }
+        };
 
     </script>
   </body>
