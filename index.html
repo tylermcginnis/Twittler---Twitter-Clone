@@ -3,65 +3,78 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="timeago.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div id="show_tweets">
-      <h2 id="tweet_number"></h2>
-    </div>
-    <script>
-      var total_tweets = 0; 
-      var counter = 0; //Number of tweets in que
-      var display = 0; //Difference between displayed tweets and total tweets in the array
-      $(document).ready(function(){
-        //var $body = $('body');
-        //$body.html('');
-        $('#show_tweets').click(showTweets);
+    <div id="main_container">
+      <div id="tweet_container">
+        <div id="show_tweets">
+          <h2 id="tweet_number"></h2>
+        </div>
+
+
+        </div> <!-- end tweet container --> 
+  </div> <!--end main container --> 
+        <script>
+          var total_tweets = 0; //Total Tweets displayed
+          var counter = 0; //Number of tweets in que
+          var display = 0; //Difference between displayed tweets and total tweets in the array
+          $(document).ready(function(){
+
+            jQuery(".timeago").timeago();
+
+            $('#show_tweets').click(showTweets);
+              var index = streams.home.length - 1;
+              while(index >= 0){
+                var tweet = streams.home[index];
+                var $tweet = $('<div></div>');
+                var timeAgo = jQuery.timeago(streams.home[display].created_at.toISOString());
+                $tweet.addClass('timeago');
+                $tweet.attr('title', timeAgo);
+                $tweet.text('@' + tweet.user + ': ' + tweet.message + timeAgo);
+                $tweet.appendTo($('#tweet_container'));
+                total_tweets++; 
+                index -= 1;
+            }
+
+            function watchArray(){
+              counter = streams.home.length-1;
+              display = counter - total_tweets; 
+              console.log(display);
+              setTimeout(watchArray, 300);
+            }
+            watchArray(); //Checks the tweets in the array.
         
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($('body'));
-          total_tweets++; 
-          index -= 1;
-        }
+            function changeNumber(){
+              if(display < 0){
+                $('#tweet_number').text("New Tweets: " + 0);
+              }
+              else{
+                $('#tweet_number').text("New Tweets: " + display);
+              }
+              setTimeout(changeNumber, 10);
+            }
+            changeNumber(); 
+                      
 
-        function watchArray(){
-          counter = streams.home.length-1;
-          display = counter - total_tweets; 
-          console.log(display);
-          setTimeout(watchArray, 3000);
-        }
-        watchArray(); //Checks the tweets in the array.
+          }); // End Document Ready
 
-         
+            function showTweets(){
+              while(display >= 1){
+                var tweet = streams.home[display]; 
+                var $tweet = $('<div></div>');
+                var timeAgo = jQuery.timeago(streams.home[display].created_at.toISOString());
+                $tweet.addClass('timeago');
+                $tweet.attr('title', timeAgo);
+                $tweet.text('@' + tweet.user + ': ' + " " + tweet.message + " " + timeAgo);
+                $tweet.appendTo($('#tweet_container'));
+                total_tweets++; 
+                display -= 1;
+              }
+            };
 
-        function changeNumber(){
-          if(display < 0){
-            $('#tweet_number').text("New Tweets: " + 0);
-          }
-          else{
-            $('#tweet_number').text("New Tweets: " + display);
-          }
-          setTimeout(changeNumber, 10);
-        }
-        changeNumber(); 
-                  
-
-      }); // End Document Ready
-
-        function showTweets(){
-          while(display >= 1){
-            var tweet = streams.home[display]; 
-            var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
-            $tweet.appendTo($('body'));
-            total_tweets++; 
-            display -= 1;
-          }
-        };
-
-    </script>
+        </script>
+      
   </body>
 </html>
