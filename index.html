@@ -5,17 +5,20 @@
     <script src="data_generator.js"></script>
     <script src="timeago.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <div id="main_container">
-      <div id="tweet_container">
-        <div id="show_tweets">
+      <div id="tweet_container"> <!-- Contains both New Tweets and Tweets Code --> 
+        <div id="show_tweets_button"> <!-- New Tweets: 123 -->
           <h2 id="tweet_number"></h2>
         </div>
+        <div id="inner_tweet_container"></div> <!-- Contains only the tweets --> 
 
 
         </div> <!-- end tweet container --> 
-  </div> <!--end main container --> 
+    </div> <!--end main container --> 
         <script>
           var total_tweets = 0; //Total Tweets displayed
           var counter = 0; //Number of tweets in que
@@ -24,7 +27,8 @@
 
             jQuery(".timeago").timeago();
 
-            $('#show_tweets').click(showTweets);
+            $('#tweet_number').on("click", showTweets);
+              
               var index = streams.home.length - 1;
               while(index >= 0){
                 var tweet = streams.home[index];
@@ -33,15 +37,14 @@
                 $tweet.addClass('timeago');
                 $tweet.attr('title', timeAgo);
                 $tweet.text('@' + tweet.user + ': ' + tweet.message + timeAgo);
-                $tweet.appendTo($('#tweet_container'));
+                $tweet.appendTo($('#inner_tweet_container'));
                 total_tweets++; 
                 index -= 1;
-            }
+              }
 
             function watchArray(){
               counter = streams.home.length-1;
               display = counter - total_tweets; 
-              console.log(display);
               setTimeout(watchArray, 300);
             }
             watchArray(); //Checks the tweets in the array.
@@ -56,7 +59,6 @@
               setTimeout(changeNumber, 10);
             }
             changeNumber(); 
-                      
 
           }); // End Document Ready
 
@@ -68,7 +70,7 @@
                 $tweet.addClass('timeago');
                 $tweet.attr('title', timeAgo);
                 $tweet.text('@' + tweet.user + ': ' + " " + tweet.message + " " + timeAgo);
-                $tweet.appendTo($('#tweet_container'));
+                $tweet.appendTo($('#inner_tweet_container'));
                 total_tweets++; 
                 display -= 1;
               }

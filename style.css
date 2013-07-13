@@ -6,3 +6,31 @@
 	width: 50%; 
 	margin: 0px auto; 
 }
+
+#tweet_number {
+	margin: 0px;
+	text-align: center;
+	color: #504f4f;
+	text-shadow: 1px 2px 2px #bbbaba;
+	font-family: 'Oswald', sans-serif;
+}
+
+#show_tweets_button {
+	background: #F1F1F1;
+}
+
+#show_tweets_button:hover{
+	cursor: pointer; 
+}
+
+#inner_tweet_container {
+	-moz-box-shadow: 0px 1px 3px rgba(15, 15, 15, 0.14);
+	-webkit-box-shadow: 0px 1px 3px rgba(15, 15, 15, 0.14);
+	box-shadow: 0px 1px 3px rgba(15, 15, 15, 0.14);
+	padding: 20px; 
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.timeago{
+	padding: 5px; 
+}
