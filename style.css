@@ -48,3 +48,14 @@
 .timeago{
 	padding: 5px; 
 }
+
+#tweet_user, #at{
+	color: #4EBAFF; 
+}
+
+#time {
+	text-align: right;
+	color: #AFAFAF;
+	display: inline-block;
+	float: right;
+}

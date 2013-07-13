@@ -25,23 +25,22 @@
           var counter = 0; //Number of tweets in que
           var display = 0; //Difference between displayed tweets and total tweets in the array
           $(document).ready(function(){
-
             jQuery(".timeago").timeago();
 
             $('#tweet_number').on("click", showTweets);
               
-              var index = streams.home.length - 1;
-              while(index >= 0){
-                var tweet = streams.home[index];
-                var $tweet = $('<div></div>');
-                var timeAgo = jQuery.timeago(streams.home[display].created_at.toISOString());
-                $tweet.addClass('timeago');
-                $tweet.attr('title', timeAgo);
-                $tweet.text('@' + tweet.user + ': ' + tweet.message + timeAgo);
-                $tweet.prependTo($('#inner_tweet_container'));
-                total_tweets++; 
-                index -= 1;
-              }
+            var index = streams.home.length - 1;
+            while(index >= 0){
+              var tweet = streams.home[index];
+              var $tweet = $('<div></div>');
+              var timeAgo = jQuery.timeago(streams.home[display].created_at.toISOString());
+              $tweet.addClass('timeago');
+              $tweet.attr('title', timeAgo);
+              $tweet.html("<span id='at'>" + "@" + "</span>" + "<span id='tweet_user'>" + tweet.user + "</span>" + ': ' + tweet.message + "<span id='time'>" + timeAgo + "</div>");
+              $tweet.prependTo($('#inner_tweet_container'));
+              total_tweets++; 
+              index -= 1;
+            }
 
             function watchArray(){
               counter = streams.home.length-1;
@@ -61,6 +60,10 @@
             }
             changeNumber(); 
 
+            $("#tweet_user").on("click", function(){
+              
+            });
+
           }); // End Document Ready
 
             function showTweets(){
@@ -70,7 +73,7 @@
                 var timeAgo = jQuery.timeago(streams.home[display].created_at.toISOString());
                 $tweet.addClass('timeago');
                 $tweet.attr('title', timeAgo);
-                $tweet.text('@' + tweet.user + ': ' + " " + tweet.message + " " + timeAgo);
+                $tweet.html("<span id='at'>" + "@" + "</span>" + "<span id='tweet_user'>" + tweet.user + "</span>" + ': ' + tweet.message + "<span id='time'>" + timeAgo + "</div>");
                 $tweet.prependTo($('#inner_tweet_container')).hide().fadeIn("slow");
                 total_tweets++; 
                 display -= 1;
