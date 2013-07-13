@@ -16,6 +16,7 @@
           <h2 id="tweet_number"></h2>
         </div>
         <div id="inner_tweet_container"></div> <!-- Contains only the tweets --> 
+        <div id="inner_tweet_container_personal"></div> 
 
 
         </div> <!-- end tweet container --> 
@@ -28,6 +29,7 @@
             jQuery(".timeago").timeago();
 
             $('#tweet_number').on("click", showTweets);
+            $('#display_all').on("click", showTweets);
               
             var index = streams.home.length - 1;
             while(index >= 0){
@@ -36,7 +38,7 @@
               var timeAgo = jQuery.timeago(streams.home[display].created_at.toISOString());
               $tweet.addClass('timeago');
               $tweet.attr('title', timeAgo);
-              $tweet.html("<span id='at'>" + "@" + "</span>" + "<span id='tweet_user'>" + tweet.user + "</span>" + ': ' + tweet.message + "<span id='time'>" + timeAgo + "</div>");
+              $tweet.html("<span id='at'>" + "@" + "</span>" + "<span class='tweet_user'>" + tweet.user + "</span>" + ': ' + tweet.message + "<span id='time'>" + timeAgo + "</div>");
               $tweet.prependTo($('#inner_tweet_container'));
               total_tweets++; 
               index -= 1;
@@ -60,8 +62,22 @@
             }
             changeNumber(); 
 
-            $("#tweet_user").on("click", function(){
-              
+            $(".tweet_user").on("click" ,function(){
+                  var userName = $(this).text(); 
+                  var shortName = streams.users[userName]; 
+                  for(var i=0; i < shortName.length; i++){
+                      var $tweet = $('<div></div>');
+                      var timeAgo = jQuery.timeago(shortName[i].created_at.toISOString());
+                      $tweet.addClass('timeago');
+                      $tweet.attr('title', timeAgo);
+                      $tweet.html("<span id='at'>" + "@" + "</span>" + "<span class='tweet_user'>" + userName + "</span>" + ': ' + shortName[i].message + "<span id='time'>" + timeAgo + "</div>");
+                      $('#inner_tweet_container').slideUp(); 
+                      $('#inner_tweet_container_personal').slideDown(); 
+                      $tweet.prependTo($('#inner_tweet_container_personal')).hide().slideDown("slow");
+                      $("#show_tweets_button").hide();
+                      total_tweets++; 
+                      display -= 1;
+                  }
             });
 
           }); // End Document Ready
@@ -73,7 +89,7 @@
                 var timeAgo = jQuery.timeago(streams.home[display].created_at.toISOString());
                 $tweet.addClass('timeago');
                 $tweet.attr('title', timeAgo);
-                $tweet.html("<span id='at'>" + "@" + "</span>" + "<span id='tweet_user'>" + tweet.user + "</span>" + ': ' + tweet.message + "<span id='time'>" + timeAgo + "</div>");
+                $tweet.html("<span id='at'>" + "@" + "</span>" + "<span class='tweet_user'>" + tweet.user + "</span>" + ': ' + tweet.message + "<span id='time'>" + timeAgo + "</div>");
                 $tweet.prependTo($('#inner_tweet_container')).hide().fadeIn("slow");
                 total_tweets++; 
                 display -= 1;

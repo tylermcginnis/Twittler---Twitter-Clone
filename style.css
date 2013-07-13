@@ -15,6 +15,7 @@
 	color: #303030;
 }
 
+
 #tweet_number {
 	margin: 0px;
 	text-align: center;
@@ -34,10 +35,14 @@
 }
 
 #show_tweets_button:hover{
+	background: #ECECEC;
+}
+
+#show_tweets_button:hover{
 	cursor: pointer; 
 }
 
-#inner_tweet_container {
+#inner_tweet_container, #inner_tweet_container_personal {
 	-moz-box-shadow: inset 0px 0px 3px rgba(15, 15, 15, 0.14);
 	-webkit-box-shadow: inset 0px 0px 3px rgba(15, 15, 15, 0.14);
 	box-shadow: inset 0px 0px 3px rgba(15, 15, 15, 0.14);
@@ -45,12 +50,20 @@
 	font-family: 'Open Sans Condensed', sans-serif;
 }
 
+#inner_tweet_container_personal{
+	display: none; 
+}
+
 .timeago{
 	padding: 5px; 
 }
 
-#tweet_user, #at{
+.tweet_user, #at{
 	color: #4EBAFF; 
+}
+
+.tweet_user:hover, #at:hover{
+	cursor: pointer; 
 }
 
 #time {
@@ -58,4 +71,10 @@
 	color: #AFAFAF;
 	display: inline-block;
 	float: right;
+}
+
+@media screen and (max-width: 600px) {
+	#tweet_container{
+		width: 95%; 
+	}
 }
