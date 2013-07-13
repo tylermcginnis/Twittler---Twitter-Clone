@@ -7,6 +7,14 @@
 	margin: 0px auto; 
 }
 
+#logo{
+	font-size: 48px;
+	font-family: 'Oswald', sans-serif;
+	font-weight: bold;  
+	text-shadow: 1px 2px 2px #bbbaba;
+	color: #303030;
+}
+
 #tweet_number {
 	margin: 0px;
 	text-align: center;
@@ -17,6 +25,12 @@
 
 #show_tweets_button {
 	background: #F1F1F1;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 
 #show_tweets_button:hover{
@@ -24,9 +38,9 @@
 }
 
 #inner_tweet_container {
-	-moz-box-shadow: 0px 1px 3px rgba(15, 15, 15, 0.14);
-	-webkit-box-shadow: 0px 1px 3px rgba(15, 15, 15, 0.14);
-	box-shadow: 0px 1px 3px rgba(15, 15, 15, 0.14);
+	-moz-box-shadow: inset 0px 0px 3px rgba(15, 15, 15, 0.14);
+	-webkit-box-shadow: inset 0px 0px 3px rgba(15, 15, 15, 0.14);
+	box-shadow: inset 0px 0px 3px rgba(15, 15, 15, 0.14);
 	padding: 20px; 
 	font-family: 'Open Sans Condensed', sans-serif;
 }

@@ -11,6 +11,7 @@
   <body>
     <div id="main_container">
       <div id="tweet_container"> <!-- Contains both New Tweets and Tweets Code --> 
+        <div id="logo"> Twittler </div> 
         <div id="show_tweets_button"> <!-- New Tweets: 123 -->
           <h2 id="tweet_number"></h2>
         </div>
@@ -37,7 +38,7 @@
                 $tweet.addClass('timeago');
                 $tweet.attr('title', timeAgo);
                 $tweet.text('@' + tweet.user + ': ' + tweet.message + timeAgo);
-                $tweet.appendTo($('#inner_tweet_container'));
+                $tweet.prependTo($('#inner_tweet_container'));
                 total_tweets++; 
                 index -= 1;
               }
@@ -70,7 +71,7 @@
                 $tweet.addClass('timeago');
                 $tweet.attr('title', timeAgo);
                 $tweet.text('@' + tweet.user + ': ' + " " + tweet.message + " " + timeAgo);
-                $tweet.appendTo($('#inner_tweet_container'));
+                $tweet.prependTo($('#inner_tweet_container')).hide().fadeIn("slow");
                 total_tweets++; 
                 display -= 1;
               }
