@@ -51,11 +51,11 @@
             watchArray(); //Checks the tweets in the array.
         
             function changeNumber(){
-              if(display < 0){
-                $('#tweet_number').text("New Tweets: " + 0);
+              if(display < 1){
+                $('#tweet_number').hide();
               }
               else{
-                $('#tweet_number').text("New Tweets: " + display);
+                $('#tweet_number').fadeIn().text("New Tweets: " + display);
               }
               setTimeout(changeNumber, 10);
             }
